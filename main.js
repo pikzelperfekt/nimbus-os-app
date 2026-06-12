@@ -2,10 +2,14 @@
 // Loads the hosted Nimbus OS full-window (?native=1 tells the OS to dress for a
 // native window: its menu bar becomes the drag handle, shifted clear of the
 // traffic lights). All data/accounts are the same as the web version.
-const { app, BrowserWindow, ipcMain, Notification, shell, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, Notification, shell, Menu, nativeImage } = require('electron');
 const path = require('path');
 const http = require('http');
 const fs = require('fs');
+
+// Present as "Nimbus OS" everywhere (menu, About, dock, crash dir) — never
+// "Electron" — even when run unpackaged via `npm start`.
+app.setName('Nimbus OS');
 
 // The OS frontend is bundled into os/ and served from a tiny local server, so
 // the whole OS runs fully offline. (Online features — accounts, the .nim web,
@@ -43,6 +47,7 @@ function createWindow() {
     minWidth: 700,
     minHeight: 500,
     title: 'Nimbus OS',
+    icon: ICON,
     titleBarStyle: 'hiddenInset',          // overlay traffic lights; OS owns the rest
     trafficLightPosition: { x: 14, y: 8 },
     backgroundColor: '#06070f',            // matches the boot screen
@@ -52,6 +57,8 @@ function createWindow() {
       nodeIntegration: false
     }
   });
+  // keep the window title fixed (don't let the OS page's <title> leak through)
+  win.on('page-title-updated', e => e.preventDefault());
   win.loadURL('http://127.0.0.1:' + port + '/index.html?native=1');
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (/^https?:/.test(url)) shell.openExternal(url);
@@ -59,6 +66,8 @@ function createWindow() {
   });
   win.on('closed', () => { win = null; });
 }
+
+const ICON = nativeImage.createFromPath(path.join(__dirname, 'build', 'icon-1024.png'));
 
 // native notifications fired by the OS (when its window is in the background)
 ipcMain.on('nimbus-notify', (e, { title, body }) => {
@@ -76,7 +85,18 @@ function buildMenu() {
 }
 
 app.whenReady().then(async () => {
-  if (process.platform === 'darwin' && app.dock) { try { app.dock.setIcon(path.join(__dirname, 'build', 'icon-1024.png')); } catch (e) {} }
+  // a clean "About Nimbus OS" panel (no Electron name/version)
+  app.setAboutPanelOptions({
+    applicationName: 'Nimbus OS',
+    applicationVersion: app.getVersion(),
+    version: '',
+    credits: 'A whole operating system, on your Mac.',
+    copyright: '© Josi'
+  });
+  // strip "Electron/x" and the app token from the user-agent so pages can't tell
+  try { app.userAgentFallback = app.userAgentFallback.replace(/\s(Nimbus OS|Electron)\/[\d.]+/g, ''); } catch (e) {}
+  // dock icon (dev — packaged builds use build/icon.icns from the bundle)
+  if (process.platform === 'darwin' && app.dock && !ICON.isEmpty()) { try { app.dock.setIcon(ICON); } catch (e) {} }
   port = await startServer();
   buildMenu();
   createWindow();

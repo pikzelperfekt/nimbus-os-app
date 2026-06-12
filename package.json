@@ -1,7 +1,7 @@
 {
   "name": "nimbus-os-app",
   "productName": "Nimbus OS",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Nimbus OS as a native macOS app — a whole desktop OS in its own window, runs fully offline.",
   "author": "Josi",
   "main": "main.js",
