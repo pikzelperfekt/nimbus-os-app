@@ -1,0 +1,28 @@
+{
+  "name": "nimbus-os-app",
+  "productName": "Nimbus OS",
+  "version": "1.0.0",
+  "description": "Nimbus OS as a native macOS app — a whole desktop OS in its own window.",
+  "author": "Josi",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "app:dir": "electron-builder --dir",
+    "app:build": "electron-builder --mac"
+  },
+  "devDependencies": {
+    "electron": "^32.3.3",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "net.nimbus.os",
+    "productName": "Nimbus OS",
+    "directories": { "output": "dist-app" },
+    "files": ["main.js", "preload.js", "build/**"],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "build/icon.icns",
+      "target": "dmg"
+    }
+  }
+}
