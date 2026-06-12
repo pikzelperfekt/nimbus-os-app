@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nimbus OS</title>
+<link rel="stylesheet" href="os.css">
+</head>
+<body>
+
+<!-- ===== Boot screen ===== -->
+<div id="boot">
+  <div class="boot-logo">◈</div>
+  <div class="boot-name">Nimbus&nbsp;OS</div>
+  <div class="boot-bar"><div class="boot-fill"></div></div>
+  <div class="boot-status">Starting up…</div>
+</div>
+
+<!-- ===== Desktop ===== -->
+<div id="desktop" class="hidden">
+
+  <!-- Menu bar -->
+  <div id="menubar">
+    <div class="mb-left">
+      <span class="mb-logo" data-menu="apple">◈</span>
+      <span class="mb-app" id="mb-appname">Finder</span>
+      <span class="mb-item" data-menu="file">File</span>
+      <span class="mb-item" data-menu="view">View</span>
+      <span class="mb-item" data-menu="help">Help</span>
+    </div>
+    <div class="mb-right">
+      <span class="mb-item" id="mb-sync" title="Sync status"></span>
+      <span class="mb-item" id="mb-account" title="NimbusNet account">👤 <span id="mb-account-name">Sign in</span></span>
+      <span class="mb-item" id="mb-search" title="Spotlight (⌘Space)">🔍</span>
+      <span id="mb-wifi">▮▮▮</span>
+      <span id="mb-battery">100%</span>
+      <span class="mb-item" id="mb-control" title="Control Center"><svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><rect x="1" y="2" width="14" height="2.4" rx="1.2" fill="currentColor" opacity=".5"/><circle cx="11" cy="3.2" r="2.4" fill="currentColor"/><rect x="1" y="7.6" width="14" height="2.4" rx="1.2" fill="currentColor" opacity=".5"/><circle cx="5" cy="8.8" r="2.4" fill="currentColor"/></svg></span>
+      <span class="mb-item" id="mb-clock">--:--</span>
+    </div>
+  </div>
+
+  <!-- Desktop icons -->
+  <div id="icons"></div>
+
+  <!-- Windows live here -->
+  <div id="windows"></div>
+
+  <!-- Dock -->
+  <div id="dock"></div>
+
+  <!-- Menu dropdown -->
+  <div id="menu-pop" class="hidden"></div>
+
+  <!-- Context menu -->
+  <div id="context-menu" class="hidden"></div>
+
+  <!-- Window snap preview -->
+  <div id="snap-preview" class="hidden"></div>
+
+  <!-- Control Center -->
+  <div id="control-center" class="hidden"></div>
+
+  <!-- Mission Control backdrop + app switcher -->
+  <div id="mission-backdrop" class="hidden"></div>
+  <div id="switcher" class="hidden"></div>
+
+  <!-- Notification toasts -->
+  <div id="notifs"></div>
+</div>
+
+<!-- Brightness dim overlay (pointer-events none) -->
+<div id="brightness"></div>
+
+<!-- ===== Login / lock screen (also the NimbusNet sign-in) ===== -->
+<div id="lock" class="hidden">
+  <div class="lock-clock"></div>
+  <div class="lock-date"></div>
+  <div class="lock-auth"></div>
+</div>
+
+<!-- ===== Spotlight ===== -->
+<div id="spotlight" class="hidden">
+  <div class="sl-box">
+    <input type="text" class="sl-input" placeholder="Search apps and files…" spellcheck="false">
+    <div class="sl-results"></div>
+  </div>
+</div>
+
+<script src="fs.js"></script>
+<script src="ui.js"></script>
+<script src="sound.js"></script>
+<script src="net.js"></script>
+<script src="sync.js"></script>
+<script src="wm.js"></script>
+<script src="apps.js"></script>
+<script src="os.js"></script>
+</body>
+</html>

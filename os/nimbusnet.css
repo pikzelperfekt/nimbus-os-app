@@ -1,0 +1,62 @@
+/* Standalone NimbusNet browser — used by the web build and the macOS app. */
+:root{ --accent:#7c8cff; }
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{height:100%;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+  background:#0f1226; color:#e8eaf2; display:flex; flex-direction:column; height:100vh; overflow:hidden;
+}
+.hidden{display:none !important;}
+button{font-family:inherit; cursor:pointer;}
+
+/* drag region for the native (Electron) window */
+#chrome{ -webkit-app-region:drag; background:#161a30; border-bottom:1px solid rgba(255,255,255,.07);
+  padding-top:env(titlebar-area-height, 0); }
+.nav{display:flex; align-items:center; gap:8px; padding:10px 12px 10px 86px;}
+.nb{ -webkit-app-region:no-drag; width:32px; height:32px; border:none; border-radius:9px;
+  background:rgba(255,255,255,.08); color:#e8eaf2; font-size:16px; }
+.nb:hover{background:rgba(255,255,255,.18);}
+.nb:disabled{opacity:.3;}
+.omni{ -webkit-app-region:no-drag; flex:1; display:flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,.08); border-radius:11px; padding:0 12px; }
+.omni:focus-within{outline:1.5px solid var(--accent);}
+.omni .g{font-size:12px; opacity:.6;}
+#url{flex:1; border:none; background:transparent; color:#e8eaf2; font-size:14px; padding:9px 0; outline:none;}
+.acct{ -webkit-app-region:no-drag; width:auto; padding:0 14px; height:32px; font-size:13px; white-space:nowrap; }
+
+#view{flex:1; position:relative; background:#fff;}
+#frame{width:100%; height:100%; border:none; background:#fff;}
+#portal{position:absolute; inset:0; overflow:auto; background:#0f1226; display:flex; justify-content:center;}
+.portal-inner{width:100%; max-width:620px; padding:8vh 28px 40px; text-align:center;}
+.logo{font-size:34px; font-weight:700; background:linear-gradient(135deg,#5b8cff,#a06bff);
+  -webkit-background-clip:text; background-clip:text; color:transparent;}
+.tag{font-size:12px; color:#9aa0b8; letter-spacing:1.5px; text-transform:uppercase; margin:6px 0 24px;}
+.search{width:100%; padding:14px 20px; border-radius:999px; border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06); color:#e8eaf2; font-size:15px; outline:none; text-align:center;}
+.search:focus{outline:1.5px solid var(--accent);}
+.net-h{display:flex; justify-content:space-between; align-items:baseline; font-size:12px; color:#9aa0b8;
+  font-weight:600; margin:30px 0 10px; text-align:left;}
+.net-list{display:flex; flex-direction:column; gap:6px;}
+.net-item{display:flex; align-items:center; gap:10px; padding:11px 14px; border-radius:11px;
+  background:rgba(255,255,255,.05); cursor:pointer; font-size:13.5px; text-align:left;}
+.net-item:hover{background:rgba(255,255,255,.11);}
+.net-item b{color:var(--accent);}
+.net-item .t{flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.net-item .m{font-size:11px; white-space:nowrap;}
+.muted{color:#9aa0b8;}
+.tip{margin-top:26px; font-size:11.5px; color:#7f86a3;}
+
+/* login modal */
+#modal{position:fixed; inset:0; z-index:50; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.45);}
+.m-card{width:320px; background:#1a1f3d; border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:22px; display:flex; flex-direction:column; gap:11px;}
+.m-brand{text-align:center; font-size:18px; font-weight:700;}
+.m-tabs{display:flex; gap:4px; background:rgba(255,255,255,.08); border-radius:9px; padding:3px;}
+.m-tabs button{flex:1; border:none; background:transparent; color:#e8eaf2; font-size:12.5px; padding:7px; border-radius:7px;}
+.m-tabs button.on{background:var(--accent); color:#fff;}
+.m-field{padding:10px 13px; border-radius:9px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:#e8eaf2; font-size:13.5px; outline:none;}
+.m-err{color:#ffb4b4; font-size:12px; min-height:14px; text-align:center;}
+.m-btn{padding:10px; border:none; border-radius:9px; background:linear-gradient(135deg,#5b8cff,#a06bff); color:#fff; font-weight:600; font-size:13.5px;}
+.m-links{display:flex; justify-content:space-between; font-size:12px;}
+.m-links a{color:#9aa0b8; cursor:pointer; text-decoration:underline;}
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-thumb{background:rgba(127,127,127,.35); border-radius:99px; border:2px solid transparent; background-clip:padding-box;}

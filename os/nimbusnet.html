@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NimbusNet</title>
+<link rel="stylesheet" href="nimbusnet.css">
+</head>
+<body>
+  <div id="chrome">
+    <div class="nav">
+      <button class="nb" data-a="back" title="Back">‹</button>
+      <button class="nb" data-a="fwd" title="Forward">›</button>
+      <button class="nb" data-a="reload" title="Reload">⟳</button>
+      <button class="nb" data-a="home" title="NimbusNet home">⌂</button>
+      <div class="omni"><span class="g">🌐</span><input id="url" placeholder="Search NimbusNet, or type a domain like cool.nim" spellcheck="false"></div>
+      <button class="nb acct" id="acct">Sign in</button>
+    </div>
+  </div>
+  <div id="view">
+    <iframe id="frame" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+    <div id="portal"></div>
+  </div>
+  <div id="modal" class="hidden"></div>
+
+  <script src="net.js"></script>
+  <script src="nimbusnet.js"></script>
+</body>
+</html>
